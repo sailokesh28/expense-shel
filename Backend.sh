@@ -40,8 +40,6 @@ echo "Script Started Executing at : $TIMESTAMP" &>> $LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf install &>> $LOG_FILE_NAME
-VALIDATE $? "Installing Required Packages"
 
 
 dnf dnf module disable nodejs -y &>> $LOG_FILE_NAME
@@ -92,7 +90,6 @@ VALIDATE $? "Starting Backend Service"
 systemctl enable backend &>> $LOG_FILE_NAME
 VALIDATE $? "Enabling Backend Service"
 
-echo "Script Executed Successfully at : $(date +%Y-%m-%d-%H-%M-%S)" &>> $LOG_FILE_NAME
 
 
 
