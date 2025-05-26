@@ -94,11 +94,14 @@ VALIDATE $? "Creating MySQL Schema & Tables"
 systemctl daemon-reload &>> $LOG_FILE_NAME
 VALIDATE $? "Reloading Systemd Daemon"
 
-systemctl restart backend &>> $LOG_FILE_NAME
-VALIDATE $? "Starting Backend Service"
 
 systemctl enable backend &>> $LOG_FILE_NAME
 VALIDATE $? "Enabling Backend Service"
+
+systemctl restart backend &>> $LOG_FILE_NAME
+VALIDATE $? "Starting Backend Service"
+
+
 
 
 
