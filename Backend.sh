@@ -42,10 +42,10 @@ CHECK_ROOT
 
 
 
-dnf module disable nodejs -y &>> $LOG_FILE_NAME
+sudo dnf module disable nodejs -y &>> $LOG_FILE_NAME
 VALIDATE $? "Disabling NodeJS Module"
 
-dnf install nodejs -y &>> $LOG_FILE_NAME
+sudo dnf install nodejs -y &>> $LOG_FILE_NAME
 VALIDATE $? "Installing NodeJS"
 
 
