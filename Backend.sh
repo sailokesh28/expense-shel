@@ -98,6 +98,17 @@ VALIDATE $? "Reloading Systemd Daemon"
 systemctl enable backend &>> $LOG_FILE_NAME
 VALIDATE $? "Enabling Backend Service"
 
+VALIDATE(){
+   if [ $1 -ne 0 ]; then 
+        echo -e "$2.....$R Failure $N"
+        echo "Check the log: $LOG_FILE_NAME"
+        exit 1
+   else
+        echo -e "$2.....$G Success $N"
+   fi 
+}
+
+# Start the backend service
 systemctl restart backend &>> $LOG_FILE_NAME
 VALIDATE $? "Starting Backend Service"
 
