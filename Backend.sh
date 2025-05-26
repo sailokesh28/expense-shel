@@ -78,7 +78,7 @@ cp /home/ec2-user/expese-shell/backend.service /etc/systemd/system/backend.servi
 dnf install mysql -y &>> $LOG_FILE_NAME
 VALIDATE $? "Installing MySQL Client"
 
-mysql -h mysql.sai3.online -u root -pExpenseApp@1 < /app/schema.sql &>> $LOG_FILE_NAME
+mysql -h mysql.sai3.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>> $LOG_FILE_NAME
 VALIDATE $? "Creating MySQL Schema & Tables"
 
 systemctl daemon-reload &>> $LOG_FILE_NAME
