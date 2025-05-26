@@ -49,7 +49,7 @@ dnf install nodejs -y &>> $LOG_FILE_NAME
 VALIDATE $? "Installing NodeJS"
 
 
-
+# Create logs folder if not exists
 id expense &>> $LOG_FILE_NAME
 if [ $? -ne 0]
     then 
@@ -58,9 +58,8 @@ if [ $? -ne 0]
 else
     echo -e "expense user already exist.......$Y SKIPPING $N"
 fi
-
-mkdir -p /app &>> $LOG_FILE_NAME
-VALIDATE $? "Creating Application Directory"
+# Create logs folder if not exists -p
+mkdir -p /app 
 
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>> $LOG_FILE_NAME
@@ -68,9 +67,13 @@ VALIDATE $? "Downloading Backend Application"
 
 cd /app
 
+#old code delete -rf * = everything in app directory
+rm -rf/ app/* 
+
+
 unzip /tmp/backend.zip &>> $LOG_FILE_NAME
 VALIDATE $? "Unzipping Backend Application"
-
+ 
 
 
 npm install &>> $LOG_FILE_NAME
@@ -91,7 +94,7 @@ VALIDATE $? "Creating MySQL Schema & Tables"
 systemctl daemon-reload &>> $LOG_FILE_NAME
 VALIDATE $? "Reloading Systemd Daemon"
 
-systemctl start backend &>> $LOG_FILE_NAME
+systemctl restart backend &>> $LOG_FILE_NAME
 VALIDATE $? "Starting Backend Service"
 
 systemctl enable backend &>> $LOG_FILE_NAME
