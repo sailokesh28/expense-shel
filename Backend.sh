@@ -49,8 +49,15 @@ dnf install nodejs -y &>> $LOG_FILE_NAME
 VALIDATE $? "Installing NodeJS"
 
 
-useradd expense &>> $LOG_FILE_NAME
-VALIDATE $? "Creating Expense User"
+
+id expense &>> $LOG_FILE_NAME
+if [ $? -ne 0]
+    then 
+    useradd expense &>>LOG_FILE_NAME
+    VALIDATE $? "Adding Expense User"
+else
+    echo -e "expense user already exist.......$Y SKIPPING $N"
+fi
 
 mkdir /app &>> $LOG_FILE_NAME
 VALIDATE $? "Creating Application Directory"
