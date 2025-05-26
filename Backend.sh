@@ -40,6 +40,10 @@ echo "Script Started Executing at : $TIMESTAMP" &>> $LOG_FILE_NAME
 
 CHECK_ROOT
 
+dnf install &>> $LOG_FILE_NAME
+VALIDATE $? "Installing Required Packages"
+
+
 dnf dnf module disable nodejs -y &>> $LOG_FILE_NAME
 VALIDATE $? "Disabling NodeJS Module"
 
@@ -70,6 +74,8 @@ VALIDATE $? "Installing Dependencies"
 cp /home/ec2-user/expese-shell/backend.service /etc/systemd/system/backend.service &>> $LOG_FILE_NAME
 
 #prepare mysql schema
+
+
 
 dnf install mysql -y &>> $LOG_FILE_NAME
 VALIDATE $? "Installing MySQL Client"
