@@ -49,12 +49,13 @@ systemctl start mysqld &>> $LOG_FILE_NAME
 VALIDATE $? "Starting MySQL Service"
 
 mysql -h mysql.sai3.online -u root -pExpenseApp@1 -e 'show databeses;'
-if [$? -ne 0 ]
+
+if [ $? -ne 0 ]
 then
-    echo "Error: Unable to connect to MySQL server. Please check your credentials or network connection." &>> $LOG_FILE_NAME
+    echo "MySql Root Password Not SetUp" &>> $LOG_FILE_NAME
     mysql_secure_installation --set-root-pass ExpenseApp@1 &>> $LOG_FILE_NAME
-     VALIDATE $? "Securing MySQL Installation"
+    VALIDATE $? "Securing MySQL Installation"
 else 
-echo -e "Mysql root password already setup ... $Y SKIPPING $N" &>> $LOG_FILE_NAME
+    echo -e "Mysql root password already setup ... $Y SKIPPING $N" &>> $LOG_FILE_NAME
 fi
 
