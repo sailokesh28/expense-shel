@@ -68,7 +68,7 @@ VALIDATE $? "Downloading Backend Application"
 cd /app
 
 #old code delete -rf * = everything in app directory
-rm -rf/ app/* 
+rm -rf /app/* 
 
 
 unzip /tmp/backend.zip &>> $LOG_FILE_NAME
